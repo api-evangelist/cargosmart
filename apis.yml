@@ -1,0 +1,19 @@
+aid: cargosmart
+url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml
+apis:
+- aid: cargosmart:cargosmart-api
+  name: CargoSmart / Inttra Container Booking API
+  tags:
+  - Maritime
+  - Container
+  - Booking
+  - Shipping
+  - Logistics
+  image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
+  humanURL: https://www.cargosmart.com/
+  baseURL: https://api.cargosmart.example.com
+  properties:
+  - url: https://www.cargosmart.com/
+    type: Documentation
+  description: >-
+    CargoSmart and Inttra provide container booking, shipment visibility, and documentation platforms for ocean freight. APIs enable booking submission, tracking container movements, retrieving vessel schedules, and managing shipping documentation across carrier networks.
