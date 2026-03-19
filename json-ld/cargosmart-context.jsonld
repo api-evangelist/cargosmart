@@ -1,0 +1,98 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "cs": "https://www.cargosmart.com/ontology/",
+    "schema": "https://schema.org/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "ContainerTracking": {
+      "@id": "schema:Parcel",
+      "@context": {
+        "containerId": {"@id": "schema:identifier"},
+        "containerType": {"@id": "cs:containerType"},
+        "carrierCode": {"@id": "cs:carrierCode"},
+        "vesselName": {"@id": "cs:vesselName"},
+        "voyageNumber": {"@id": "cs:voyageNumber"},
+        "currentStatus": {"@id": "schema:deliveryStatus"},
+        "originPort": {"@id": "schema:originAddress"},
+        "destinationPort": {"@id": "schema:destinationAddress"},
+        "estimatedArrival": {"@id": "schema:expectedArrivalUntil", "@type": "xsd:dateTime"},
+        "actualArrival": {"@id": "schema:expectedArrivalFrom", "@type": "xsd:dateTime"},
+        "events": {"@id": "cs:trackingEvent", "@container": "@set"}
+      }
+    },
+
+    "TrackingEvent": {
+      "@id": "schema:Event",
+      "@context": {
+        "eventId": {"@id": "schema:identifier"},
+        "eventType": {"@id": "cs:eventType"},
+        "description": {"@id": "schema:description"},
+        "location": {"@id": "schema:location"},
+        "vesselName": {"@id": "cs:vesselName"},
+        "eventTime": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "isActual": {"@id": "cs:isActualEvent", "@type": "xsd:boolean"}
+      }
+    },
+
+    "Booking": {
+      "@id": "schema:Order",
+      "@context": {
+        "bookingId": {"@id": "schema:identifier"},
+        "bookingNumber": {"@id": "schema:orderNumber"},
+        "carrierCode": {"@id": "cs:carrierCode"},
+        "status": {"@id": "schema:orderStatus"},
+        "originPort": {"@id": "schema:originAddress"},
+        "destinationPort": {"@id": "schema:destinationAddress"},
+        "requestedDepartureDate": {"@id": "schema:scheduledTime", "@type": "xsd:date"},
+        "containers": {"@id": "schema:orderedItem", "@container": "@set"},
+        "shipper": {"@id": "schema:seller"},
+        "consignee": {"@id": "schema:buyer"}
+      }
+    },
+
+    "BillOfLading": {
+      "@id": "schema:Invoice",
+      "@context": {
+        "blNumber": {"@id": "schema:identifier"},
+        "blType": {"@id": "cs:blType"},
+        "carrierCode": {"@id": "cs:carrierCode"},
+        "issueDate": {"@id": "schema:dateIssued", "@type": "xsd:date"},
+        "shipper": {"@id": "schema:seller"},
+        "consignee": {"@id": "schema:buyer"},
+        "originPort": {"@id": "schema:originAddress"},
+        "destinationPort": {"@id": "schema:destinationAddress"},
+        "vesselName": {"@id": "cs:vesselName"},
+        "cargoDescription": {"@id": "schema:description"},
+        "freightTerms": {"@id": "cs:freightTerms"}
+      }
+    },
+
+    "Port": {
+      "@id": "schema:Place",
+      "@context": {
+        "locode": {"@id": "cs:locode"},
+        "portName": {"@id": "schema:name"},
+        "countryCode": {"@id": "schema:addressCountry"},
+        "terminalName": {"@id": "cs:terminalName"}
+      }
+    },
+
+    "VesselPosition": {
+      "@id": "geo:Point",
+      "@context": {
+        "vesselIMO": {"@id": "cs:imoNumber"},
+        "vesselName": {"@id": "schema:name"},
+        "latitude": {"@id": "geo:lat", "@type": "xsd:decimal"},
+        "longitude": {"@id": "geo:long", "@type": "xsd:decimal"},
+        "speed": {"@id": "cs:speedOverGround", "@type": "xsd:decimal"},
+        "heading": {"@id": "cs:courseOverGround", "@type": "xsd:decimal"},
+        "destination": {"@id": "cs:destination"},
+        "eta": {"@id": "cs:estimatedTimeOfArrival", "@type": "xsd:dateTime"},
+        "timestamp": {"@id": "dcterms:modified", "@type": "xsd:dateTime"}
+      }
+    }
+  }
+}

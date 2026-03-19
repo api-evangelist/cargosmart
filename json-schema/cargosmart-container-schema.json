@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json",
+  "title": "CargoSmart Container Tracking",
+  "description": "JSON Schema for a CargoSmart container tracking record including event history and vessel information.",
+  "type": "object",
+  "required": ["containerId", "currentStatus"],
+  "properties": {
+    "containerId": {
+      "type": "string",
+      "description": "ISO 6346 container number (e.g., MSCU1234567)",
+      "pattern": "^[A-Z]{4}\\d{7}$"
+    },
+    "containerType": {
+      "type": "string",
+      "description": "ISO container type code",
+      "enum": ["20GP", "40GP", "40HC", "20RF", "40RF", "45HC"]
+    },
+    "carrierCode": {
+      "type": "string",
+      "description": "Ocean carrier SCAC code"
+    },
+    "vesselName": {
+      "type": "string"
+    },
+    "voyageNumber": {
+      "type": "string"
+    },
+    "currentStatus": {
+      "type": "string",
+      "enum": ["Empty", "Loaded", "OnVessel", "AtPort", "InTransit", "Delivered"]
+    },
+    "originPort": {
+      "$ref": "#/$defs/Port"
+    },
+    "destinationPort": {
+      "$ref": "#/$defs/Port"
+    },
+    "estimatedArrival": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Estimated arrival at destination port"
+    },
+    "actualArrival": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Actual arrival at destination port"
+    },
+    "events": {
+      "type": "array",
+      "description": "Chronological list of tracking events",
+      "items": {
+        "$ref": "#/$defs/TrackingEvent"
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Port": {
+      "type": "object",
+      "properties": {
+        "locode": {
+          "type": "string",
+          "description": "UN/LOCODE (e.g., USNYC, CNSHA)",
+          "pattern": "^[A-Z]{5}$"
+        },
+        "portName": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "terminalName": {
+          "type": "string"
+        }
+      }
+    },
+    "TrackingEvent": {
+      "type": "object",
+      "required": ["eventType", "eventTime"],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["GateIn", "GateOut", "Load", "Discharge", "Departure", "Arrival", "Customs", "Delivery", "EmptyReturn"]
+        },
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/$defs/Port"
+        },
+        "vesselName": {
+          "type": "string"
+        },
+        "voyageNumber": {
+          "type": "string"
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isActual": {
+          "type": "boolean",
+          "description": "true = actual event, false = estimated event"
+        }
+      }
+    }
+  }
+}

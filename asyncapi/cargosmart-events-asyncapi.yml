@@ -1,0 +1,271 @@
+asyncapi: 2.6.0
+info:
+  title: CargoSmart Shipment Events API
+  description: >-
+    The CargoSmart Shipment Events API delivers real-time event notifications for
+    container movements, shipment milestones, and vessel arrivals/departures via
+    webhooks or server-sent events. Subscribe to tracking events for automated
+    supply chain visibility and exception management.
+  version: 1.0.0
+  contact:
+    name: CargoSmart
+    url: https://www.cargosmart.com/
+
+servers:
+  production:
+    url: https://events.cargosmart.com
+    protocol: https
+    description: CargoSmart Event Delivery endpoint
+
+channels:
+  container.event:
+    description: Published when a container tracking event occurs (gate in/out, load, discharge, arrival, departure).
+    subscribe:
+      operationId: onContainerEvent
+      summary: Container tracking event
+      description: Receive real-time notifications for container movement events.
+      tags:
+        - name: Containers
+      message:
+        $ref: '#/components/messages/ContainerEventMessage'
+
+  shipment.milestone:
+    description: Published when a shipment reaches a key milestone.
+    subscribe:
+      operationId: onShipmentMilestone
+      summary: Shipment milestone reached
+      description: Receive notifications for important shipment milestones (departure, arrival, delivery).
+      tags:
+        - name: Shipments
+      message:
+        $ref: '#/components/messages/ShipmentMilestoneMessage'
+
+  vessel.arrival:
+    description: Published when a vessel arrives at a port.
+    subscribe:
+      operationId: onVesselArrival
+      summary: Vessel arrived at port
+      description: Receive notifications when a tracked vessel arrives at a port.
+      tags:
+        - name: Vessels
+      message:
+        $ref: '#/components/messages/VesselArrivalMessage'
+
+  vessel.departure:
+    description: Published when a vessel departs from a port.
+    subscribe:
+      operationId: onVesselDeparture
+      summary: Vessel departed from port
+      description: Receive notifications when a tracked vessel departs from a port.
+      tags:
+        - name: Vessels
+      message:
+        $ref: '#/components/messages/VesselDepartureMessage'
+
+  booking.status:
+    description: Published when a container booking status changes.
+    subscribe:
+      operationId: onBookingStatusChanged
+      summary: Booking status changed
+      description: Receive notifications when a booking is confirmed, amended, or cancelled.
+      tags:
+        - name: Bookings
+      message:
+        $ref: '#/components/messages/BookingStatusMessage'
+
+  eta.update:
+    description: Published when the ETA for a container/vessel is updated.
+    subscribe:
+      operationId: onEtaUpdated
+      summary: ETA updated
+      description: Receive notifications when the estimated time of arrival changes.
+      tags:
+        - name: Vessels
+      message:
+        $ref: '#/components/messages/EtaUpdateMessage'
+
+components:
+  messages:
+    ContainerEventMessage:
+      name: ContainerEventMessage
+      title: Container Event
+      summary: Container tracking event notification
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-cargosmart-signature:
+            type: string
+            description: HMAC-SHA256 signature for event authenticity
+          x-cargosmart-event-id:
+            type: string
+      payload:
+        $ref: '#/components/schemas/ContainerEventPayload'
+
+    ShipmentMilestoneMessage:
+      name: ShipmentMilestoneMessage
+      title: Shipment Milestone
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ShipmentMilestonePayload'
+
+    VesselArrivalMessage:
+      name: VesselArrivalMessage
+      title: Vessel Arrival
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VesselEventPayload'
+
+    VesselDepartureMessage:
+      name: VesselDepartureMessage
+      title: Vessel Departure
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VesselEventPayload'
+
+    BookingStatusMessage:
+      name: BookingStatusMessage
+      title: Booking Status Changed
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BookingStatusPayload'
+
+    EtaUpdateMessage:
+      name: EtaUpdateMessage
+      title: ETA Updated
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EtaUpdatePayload'
+
+  schemas:
+    EventEnvelope:
+      type: object
+      required: [eventId, eventType, timestamp]
+      properties:
+        eventId:
+          type: string
+          description: Unique event identifier
+        eventType:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+    ContainerEventPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            containerId:
+              type: string
+              description: Container number
+            eventType:
+              type: string
+              enum: [GateIn, GateOut, Load, Discharge, Departure, Arrival, Customs, Delivery, EmptyReturn]
+            location:
+              type: object
+              properties:
+                locode:
+                  type: string
+                portName:
+                  type: string
+                terminalName:
+                  type: string
+            vesselName:
+              type: string
+            voyageNumber:
+              type: string
+            carrierCode:
+              type: string
+            isActual:
+              type: boolean
+
+    ShipmentMilestonePayload:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            billOfLadingNumber:
+              type: string
+            bookingNumber:
+              type: string
+            milestone:
+              type: string
+              enum: [Booked, VGMSubmitted, Loaded, Departed, InTransit, Arrived, CustomsCleared, Delivered]
+            containers:
+              type: array
+              items:
+                type: string
+            originPort:
+              type: string
+            destinationPort:
+              type: string
+
+    VesselEventPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            vesselIMO:
+              type: string
+            vesselName:
+              type: string
+            voyageNumber:
+              type: string
+            carrierCode:
+              type: string
+            portLocode:
+              type: string
+            portName:
+              type: string
+            terminalName:
+              type: string
+            eventTime:
+              type: string
+              format: date-time
+
+    BookingStatusPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            bookingId:
+              type: string
+            bookingNumber:
+              type: string
+            carrierCode:
+              type: string
+            newStatus:
+              type: string
+              enum: [Submitted, Confirmed, Amended, Cancelled]
+            previousStatus:
+              type: string
+            confirmedVessel:
+              type: string
+            confirmedVoyage:
+              type: string
+
+    EtaUpdatePayload:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            containerId:
+              type: string
+            vesselIMO:
+              type: string
+            vesselName:
+              type: string
+            portLocode:
+              type: string
+            portName:
+              type: string
+            previousEta:
+              type: string
+              format: date-time
+            updatedEta:
+              type: string
+              format: date-time
+            delayHours:
+              type: integer
+              description: Positive = delayed, negative = early

@@ -12,10 +12,12 @@ apis:
   - Ocean Freight
   image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
   humanURL: https://www.cargosmart.com/
-  baseURL: https://api.cargosmart.example.com
+  baseURL: https://api.cargosmart.com
   properties:
   - url: https://www.cargosmart.com/
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+    type: OpenAPI
   description: >-
     The CargoSmart Container Booking API enables programmatic submission of container booking requests across multiple ocean carriers. APIs support booking creation, amendment, cancellation, and confirmation workflows for shippers, NVOCCs, and logistics service providers.
 
@@ -30,10 +32,14 @@ apis:
   - Logistics
   image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
   humanURL: https://www.cargosmart.com/
-  baseURL: https://api.cargosmart.example.com
+  baseURL: https://api.cargosmart.com
   properties:
   - url: https://www.cargosmart.com/
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+    type: OpenAPI
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
+    type: AsyncAPI
   description: >-
     The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
 
@@ -48,10 +54,12 @@ apis:
   - Logistics
   image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
   humanURL: https://www.cargosmart.com/
-  baseURL: https://api.cargosmart.example.com
+  baseURL: https://api.cargosmart.com
   properties:
   - url: https://www.cargosmart.com/
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+    type: OpenAPI
   description: >-
     The CargoSmart Vessel Schedule API provides access to ocean carrier vessel schedules, port rotation data, and sailing frequency information. APIs support route planning, transit time calculation, and carrier selection for ocean freight shippers and forwarders.
 
@@ -66,10 +74,12 @@ apis:
   - Shipping
   image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
   humanURL: https://www.cargosmart.com/
-  baseURL: https://api.cargosmart.example.com
+  baseURL: https://api.cargosmart.com
   properties:
   - url: https://www.cargosmart.com/
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+    type: OpenAPI
   description: >-
     The CargoSmart Shipping Documentation API enables electronic exchange of shipping documents including bills of lading, cargo manifests, and customs declarations. APIs and EDI integrations support paperless documentation workflows across carriers, ports, customs authorities, and logistics service providers.
 
@@ -80,6 +90,16 @@ common:
     type: Portal
   - url: https://www.cargosmart.com/
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+    type: OpenAPI
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
+    type: AsyncAPI
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json
+    type: JSONSchema
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json
+    type: JSONSchema
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-ld/cargosmart-context.jsonld
+    type: JSONLDContext
 
 maintainers:
 - name: Kin Lane

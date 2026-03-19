@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json",
+  "title": "CargoSmart Container Booking",
+  "description": "JSON Schema for a CargoSmart ocean container booking request/confirmation.",
+  "type": "object",
+  "required": ["bookingId", "carrierCode", "status", "containers"],
+  "properties": {
+    "bookingId": {
+      "type": "string"
+    },
+    "bookingNumber": {
+      "type": "string",
+      "description": "Carrier-assigned booking confirmation number"
+    },
+    "carrierCode": {
+      "type": "string",
+      "description": "Ocean carrier SCAC code (e.g., MSCU, HLCU, CMDU)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Submitted", "Confirmed", "Amended", "Cancelled"]
+    },
+    "originPort": {
+      "$ref": "#/$defs/Port"
+    },
+    "destinationPort": {
+      "$ref": "#/$defs/Port"
+    },
+    "requestedDepartureDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "confirmedVessel": {
+      "type": "string"
+    },
+    "confirmedVoyage": {
+      "type": "string"
+    },
+    "containers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["containerType", "quantity"],
+        "properties": {
+          "containerType": {
+            "type": "string",
+            "enum": ["20GP", "40GP", "40HC", "20RF", "40RF", "45HC"]
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "containerId": {
+            "type": "string",
+            "description": "Assigned container number (after confirmation)"
+          }
+        }
+      }
+    },
+    "cargoDescription": {
+      "type": "string"
+    },
+    "shipper": {
+      "$ref": "#/$defs/Party"
+    },
+    "consignee": {
+      "$ref": "#/$defs/Party"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Port": {
+      "type": "object",
+      "required": ["locode"],
+      "properties": {
+        "locode": {"type": "string", "pattern": "^[A-Z]{5}$"},
+        "portName": {"type": "string"},
+        "countryCode": {"type": "string", "pattern": "^[A-Z]{2}$"},
+        "terminalName": {"type": "string"}
+      }
+    },
+    "Party": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "address": {"type": "string"},
+        "city": {"type": "string"},
+        "country": {"type": "string"},
+        "taxId": {"type": "string"}
+      }
+    }
+  }
+}

@@ -1,0 +1,644 @@
+openapi: 3.1.0
+info:
+  title: CargoSmart Shipment Tracking API
+  description: >-
+    The CargoSmart Shipment Tracking API provides real-time container tracking and
+    shipment visibility across ocean carriers and ports. APIs return container movement
+    events, vessel positions, ETA predictions, and port arrival/departure data for
+    supply chain visibility platforms.
+  version: 1.0.0
+  contact:
+    name: CargoSmart
+    url: https://www.cargosmart.com/
+
+servers:
+  - url: https://api.cargosmart.com
+    description: CargoSmart Production API
+
+security:
+  - apiKey: []
+  - oauth2: []
+
+tags:
+  - name: Containers
+    description: Container tracking and event history
+  - name: Shipments
+    description: Shipment visibility and status
+  - name: Vessels
+    description: Vessel position and schedule
+  - name: Bookings
+    description: Container booking management
+  - name: Documents
+    description: Shipping documentation
+
+paths:
+  /tracking/v1/containers/{containerId}:
+    get:
+      operationId: trackContainer
+      summary: Track container
+      description: >-
+        Retrieve real-time tracking information and event history for a specific
+        container number. Returns vessel position, port events, ETA, and
+        container status across carriers.
+      tags: [Containers]
+      parameters:
+        - name: containerId
+          in: path
+          required: true
+          description: Container number (e.g., MSCU1234567)
+          schema:
+            type: string
+            pattern: "^[A-Z]{4}\\d{7}$"
+      responses:
+        '200':
+          description: Container tracking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerTracking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /tracking/v1/containers:
+    get:
+      operationId: listContainerTracking
+      summary: Track multiple containers
+      description: Retrieve tracking status for multiple containers in a single request.
+      tags: [Containers]
+      parameters:
+        - name: containerIds
+          in: query
+          required: true
+          description: Comma-separated list of container numbers
+          schema:
+            type: string
+        - name: billOfLadingNumber
+          in: query
+          description: Filter by bill of lading number
+          schema:
+            type: string
+        - name: bookingNumber
+          in: query
+          description: Filter by booking number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Container tracking results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerTrackingList'
+
+  /tracking/v1/shipments/{billOfLadingNumber}:
+    get:
+      operationId: getShipment
+      summary: Get shipment by bill of lading
+      description: Retrieve shipment details and container list for a bill of lading number.
+      tags: [Shipments]
+      parameters:
+        - name: billOfLadingNumber
+          in: path
+          required: true
+          description: Bill of lading number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Shipment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /vessels/v1/schedules:
+    get:
+      operationId: searchVesselSchedules
+      summary: Search vessel schedules
+      description: Search ocean carrier vessel schedules by origin and destination port, carrier, or date range.
+      tags: [Vessels]
+      parameters:
+        - name: originPort
+          in: query
+          description: Origin port UN/LOCODE (e.g., USNYC)
+          schema:
+            type: string
+            pattern: "^[A-Z]{5}$"
+        - name: destinationPort
+          in: query
+          description: Destination port UN/LOCODE
+          schema:
+            type: string
+            pattern: "^[A-Z]{5}$"
+        - name: carrierId
+          in: query
+          description: Carrier SCAC code
+          schema:
+            type: string
+        - name: departureFrom
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: departureTo
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Vessel schedules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VesselScheduleList'
+
+  /vessels/v1/{vesselIMO}/position:
+    get:
+      operationId: getVesselPosition
+      summary: Get vessel position
+      description: Get the current AIS-based position of a vessel by IMO number.
+      tags: [Vessels]
+      parameters:
+        - name: vesselIMO
+          in: path
+          required: true
+          description: IMO vessel number
+          schema:
+            type: string
+            pattern: "^\\d{7}$"
+      responses:
+        '200':
+          description: Vessel position
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VesselPosition'
+
+  /bookings/v1:
+    post:
+      operationId: createBooking
+      summary: Create container booking
+      description: Submit a new container booking request to an ocean carrier.
+      tags: [Bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Booking submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+    get:
+      operationId: listBookings
+      summary: List bookings
+      description: Retrieve a list of container bookings.
+      tags: [Bookings]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Submitted, Confirmed, Amended, Cancelled]
+        - name: carrierId
+          in: query
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingList'
+
+  /documents/v1/bills-of-lading/{blNumber}:
+    get:
+      operationId: getBillOfLading
+      summary: Get bill of lading
+      description: Retrieve electronic bill of lading document details.
+      tags: [Documents]
+      parameters:
+        - name: blNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bill of lading details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillOfLading'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.cargosmart.com/oauth/token
+          scopes:
+            tracking:read: Read shipment tracking data
+            bookings:read: Read booking data
+            bookings:write: Create and manage bookings
+            documents:read: Read shipping documents
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    ContainerTracking:
+      type: object
+      properties:
+        containerId:
+          type: string
+          description: Container number
+        containerType:
+          type: string
+          enum: [20GP, 40GP, 40HC, 20RF, 40RF, 45HC]
+        carrierCode:
+          type: string
+        vesselName:
+          type: string
+        voyageNumber:
+          type: string
+        currentStatus:
+          type: string
+          enum: [Empty, Loaded, OnVessel, AtPort, InTransit, Delivered]
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        estimatedArrival:
+          type: string
+          format: date-time
+        actualArrival:
+          type: string
+          format: date-time
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+        lastUpdated:
+          type: string
+          format: date-time
+
+    ContainerTrackingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerTracking'
+        total:
+          type: integer
+
+    TrackingEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+          enum: [GateIn, GateOut, Load, Discharge, Departure, Arrival, Customs, Delivery, EmptyReturn]
+        description:
+          type: string
+        location:
+          $ref: '#/components/schemas/Port'
+        vesselName:
+          type: string
+        voyageNumber:
+          type: string
+        eventTime:
+          type: string
+          format: date-time
+        isActual:
+          type: boolean
+          description: true if actual, false if estimated
+
+    Shipment:
+      type: object
+      properties:
+        billOfLadingNumber:
+          type: string
+        bookingNumber:
+          type: string
+        carrierCode:
+          type: string
+        carrierName:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/Party'
+        consignee:
+          $ref: '#/components/schemas/Party'
+        notifyParty:
+          $ref: '#/components/schemas/Party'
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerId:
+                type: string
+              containerType:
+                type: string
+              sealNumber:
+                type: string
+        cargoDescription:
+          type: string
+        grossWeight:
+          type: number
+        weightUnit:
+          type: string
+          enum: [KG, LB]
+
+    VesselScheduleList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VesselSchedule'
+
+    VesselSchedule:
+      type: object
+      properties:
+        scheduleId:
+          type: string
+        vesselName:
+          type: string
+        vesselIMO:
+          type: string
+        voyageNumber:
+          type: string
+        carrierCode:
+          type: string
+        carrierName:
+          type: string
+        route:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                $ref: '#/components/schemas/Port'
+              estimatedArrival:
+                type: string
+                format: date-time
+              estimatedDeparture:
+                type: string
+                format: date-time
+        transitDays:
+          type: integer
+        directService:
+          type: boolean
+
+    VesselPosition:
+      type: object
+      properties:
+        vesselIMO:
+          type: string
+        vesselName:
+          type: string
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+        speed:
+          type: number
+          description: Speed over ground in knots
+        heading:
+          type: number
+          minimum: 0
+          maximum: 360
+        destination:
+          type: string
+        eta:
+          type: string
+          format: date-time
+        timestamp:
+          type: string
+          format: date-time
+
+    Booking:
+      type: object
+      properties:
+        bookingId:
+          type: string
+        bookingNumber:
+          type: string
+        carrierCode:
+          type: string
+        status:
+          type: string
+          enum: [Submitted, Confirmed, Amended, Cancelled]
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        requestedDepartureDate:
+          type: string
+          format: date
+        confirmedVessel:
+          type: string
+        confirmedVoyage:
+          type: string
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerType:
+                type: string
+                enum: [20GP, 40GP, 40HC, 20RF, 40RF, 45HC]
+              quantity:
+                type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    BookingRequest:
+      type: object
+      required: [carrierCode, originPort, destinationPort, requestedDepartureDate, containers]
+      properties:
+        carrierCode:
+          type: string
+          description: Ocean carrier SCAC code
+        originPort:
+          type: string
+          description: UN/LOCODE of origin port
+        destinationPort:
+          type: string
+          description: UN/LOCODE of destination port
+        requestedDepartureDate:
+          type: string
+          format: date
+        containers:
+          type: array
+          items:
+            type: object
+            required: [containerType, quantity]
+            properties:
+              containerType:
+                type: string
+                enum: [20GP, 40GP, 40HC, 20RF, 40RF, 45HC]
+              quantity:
+                type: integer
+                minimum: 1
+        cargoDescription:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/Party'
+        consignee:
+          $ref: '#/components/schemas/Party'
+
+    BookingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Booking'
+
+    BillOfLading:
+      type: object
+      properties:
+        blNumber:
+          type: string
+        blType:
+          type: string
+          enum: [Original, Seaway, Electronic, Telex_Release]
+        carrierCode:
+          type: string
+        issueDate:
+          type: string
+          format: date
+        shipper:
+          $ref: '#/components/schemas/Party'
+        consignee:
+          $ref: '#/components/schemas/Party'
+        notifyParty:
+          $ref: '#/components/schemas/Party'
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        vesselName:
+          type: string
+        voyageNumber:
+          type: string
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerId:
+                type: string
+              containerType:
+                type: string
+              sealNumber:
+                type: string
+        cargoDescription:
+          type: string
+        grossWeight:
+          type: number
+        weightUnit:
+          type: string
+        freightTerms:
+          type: string
+          enum: [Prepaid, Collect]
+
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
+
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
