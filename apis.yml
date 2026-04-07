@@ -1,25 +1,22 @@
 aid: cargosmart
-url: 
-  https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml
 apis:
   - aid: cargosmart:cargosmart-container-booking-api
     name: CargoSmart Container Booking API
     tags:
-      - Maritime
-      - Container
       - Booking
-      - Shipping
+      - Container
       - Logistics
+      - Maritime
       - Ocean Freight
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
+      - Shipping
+    image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
     humanURL: https://www.cargosmart.com/
     baseURL: https://api.cargosmart.com
     properties:
       - url: https://www.cargosmart.com/
         type: Documentation
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
         type: OpenAPI
     description: >-
       The CargoSmart Container Booking API enables programmatic submission of container
@@ -30,24 +27,21 @@ apis:
   - aid: cargosmart:cargosmart-shipment-tracking-api
     name: CargoSmart Shipment Tracking API
     tags:
-      - Maritime
       - Container
+      - Logistics
+      - Maritime
+      - Shipping
       - Tracking
       - Visibility
-      - Shipping
-      - Logistics
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
     humanURL: https://www.cargosmart.com/
     baseURL: https://api.cargosmart.com
     properties:
       - url: https://www.cargosmart.com/
         type: Documentation
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
         type: OpenAPI
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
         type: AsyncAPI
     description: >-
       The CargoSmart Shipment Tracking API provides real-time container tracking and
@@ -58,21 +52,19 @@ apis:
   - aid: cargosmart:cargosmart-vessel-schedule-api
     name: CargoSmart Vessel Schedule API
     tags:
+      - Logistics
       - Maritime
-      - Vessel
+      - Port
       - Schedule
       - Shipping
-      - Port
-      - Logistics
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
+      - Vessel
+    image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
     humanURL: https://www.cargosmart.com/
     baseURL: https://api.cargosmart.com
     properties:
       - url: https://www.cargosmart.com/
         type: Documentation
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
         type: OpenAPI
     description: >-
       The CargoSmart Vessel Schedule API provides access to ocean carrier vessel schedules,
@@ -83,21 +75,19 @@ apis:
   - aid: cargosmart:cargosmart-shipping-documents-api
     name: CargoSmart Shipping Documentation API
     tags:
-      - Maritime
+      - Bill of Lading
       - Container
       - Documentation
-      - Bill of Lading
       - EDI
+      - Maritime
       - Shipping
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
     humanURL: https://www.cargosmart.com/
     baseURL: https://api.cargosmart.com
     properties:
       - url: https://www.cargosmart.com/
         type: Documentation
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
         type: OpenAPI
     description: >-
       The CargoSmart Shipping Documentation API enables electronic exchange of shipping
@@ -112,20 +102,15 @@ common:
     type: Portal
   - url: https://www.cargosmart.com/
     type: Documentation
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml
     type: OpenAPI
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
     type: AsyncAPI
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-ld/cargosmart-context.jsonld
+  - url: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-ld/cargosmart-context.jsonld
     type: JSONLDContext
 
 maintainers:

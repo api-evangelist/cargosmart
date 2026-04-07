@@ -20,17 +20,17 @@ security:
   - oauth2: []
 
 tags:
+  - name: Bookings
+    description: Container booking management
   - name: Containers
     description: Container tracking and event history
+  - name: Documents
+    description: Shipping documentation
+
   - name: Shipments
     description: Shipment visibility and status
   - name: Vessels
     description: Vessel position and schedule
-  - name: Bookings
-    description: Container booking management
-  - name: Documents
-    description: Shipping documentation
-
 paths:
   /tracking/v1/containers/{containerId}:
     get:
