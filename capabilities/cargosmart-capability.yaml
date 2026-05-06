@@ -1,0 +1,451 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CargoSmart Shipment Tracking API
+  description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean
+    carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure
+    data for supply chain visibility platforms.
+  tags:
+  - Cargosmart
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: cargosmart
+    baseUri: https://api.cargosmart.com
+    description: CargoSmart Shipment Tracking API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: X-API-Key
+      value: '{{CARGOSMART_TOKEN}}'
+    resources:
+    - name: tracking-v1-containers-containerid
+      path: /tracking/v1/containers/{containerId}
+      operations:
+      - name: trackcontainer
+        method: GET
+        description: Track container
+        inputParameters:
+        - name: containerId
+          in: path
+          type: string
+          required: true
+          description: Container number (e.g., MSCU1234567)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tracking-v1-containers
+      path: /tracking/v1/containers
+      operations:
+      - name: listcontainertracking
+        method: GET
+        description: Track multiple containers
+        inputParameters:
+        - name: containerIds
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of container numbers
+        - name: billOfLadingNumber
+          in: query
+          type: string
+          description: Filter by bill of lading number
+        - name: bookingNumber
+          in: query
+          type: string
+          description: Filter by booking number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tracking-v1-shipments-billofladingnumber
+      path: /tracking/v1/shipments/{billOfLadingNumber}
+      operations:
+      - name: getshipment
+        method: GET
+        description: Get shipment by bill of lading
+        inputParameters:
+        - name: billOfLadingNumber
+          in: path
+          type: string
+          required: true
+          description: Bill of lading number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vessels-v1-schedules
+      path: /vessels/v1/schedules
+      operations:
+      - name: searchvesselschedules
+        method: GET
+        description: Search vessel schedules
+        inputParameters:
+        - name: originPort
+          in: query
+          type: string
+          description: Origin port UN/LOCODE (e.g., USNYC)
+        - name: destinationPort
+          in: query
+          type: string
+          description: Destination port UN/LOCODE
+        - name: carrierId
+          in: query
+          type: string
+          description: Carrier SCAC code
+        - name: departureFrom
+          in: query
+          type: string
+        - name: departureTo
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vessels-v1-vesselimo-position
+      path: /vessels/v1/{vesselIMO}/position
+      operations:
+      - name: getvesselposition
+        method: GET
+        description: Get vessel position
+        inputParameters:
+        - name: vesselIMO
+          in: path
+          type: string
+          required: true
+          description: IMO vessel number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bookings-v1
+      path: /bookings/v1
+      operations:
+      - name: createbooking
+        method: POST
+        description: Create container booking
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listbookings
+        method: GET
+        description: List bookings
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: carrierId
+          in: query
+          type: string
+        - name: fromDate
+          in: query
+          type: string
+        - name: toDate
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: documents-v1-bills-of-lading-blnumber
+      path: /documents/v1/bills-of-lading/{blNumber}
+      operations:
+      - name: getbilloflading
+        method: GET
+        description: Get bill of lading
+        inputParameters:
+        - name: blNumber
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: cargosmart-rest
+    description: REST adapter for CargoSmart Shipment Tracking API.
+    resources:
+    - path: /tracking/v1/containers/{containerId}
+      name: trackcontainer
+      operations:
+      - method: GET
+        name: trackcontainer
+        description: Track container
+        call: cargosmart.trackcontainer
+        with:
+          containerId: rest.containerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tracking/v1/containers
+      name: listcontainertracking
+      operations:
+      - method: GET
+        name: listcontainertracking
+        description: Track multiple containers
+        call: cargosmart.listcontainertracking
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tracking/v1/shipments/{billOfLadingNumber}
+      name: getshipment
+      operations:
+      - method: GET
+        name: getshipment
+        description: Get shipment by bill of lading
+        call: cargosmart.getshipment
+        with:
+          billOfLadingNumber: rest.billOfLadingNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /vessels/v1/schedules
+      name: searchvesselschedules
+      operations:
+      - method: GET
+        name: searchvesselschedules
+        description: Search vessel schedules
+        call: cargosmart.searchvesselschedules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /vessels/v1/{vesselIMO}/position
+      name: getvesselposition
+      operations:
+      - method: GET
+        name: getvesselposition
+        description: Get vessel position
+        call: cargosmart.getvesselposition
+        with:
+          vesselIMO: rest.vesselIMO
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings/v1
+      name: createbooking
+      operations:
+      - method: POST
+        name: createbooking
+        description: Create container booking
+        call: cargosmart.createbooking
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings/v1
+      name: listbookings
+      operations:
+      - method: GET
+        name: listbookings
+        description: List bookings
+        call: cargosmart.listbookings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /documents/v1/bills-of-lading/{blNumber}
+      name: getbilloflading
+      operations:
+      - method: GET
+        name: getbilloflading
+        description: Get bill of lading
+        call: cargosmart.getbilloflading
+        with:
+          blNumber: rest.blNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: cargosmart-mcp
+    transport: http
+    description: MCP adapter for CargoSmart Shipment Tracking API for AI agent use.
+    tools:
+    - name: trackcontainer
+      description: Track container
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.trackcontainer
+      with:
+        containerId: tools.containerId
+      inputParameters:
+      - name: containerId
+        type: string
+        description: Container number (e.g., MSCU1234567)
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcontainertracking
+      description: Track multiple containers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.listcontainertracking
+      with:
+        containerIds: tools.containerIds
+        billOfLadingNumber: tools.billOfLadingNumber
+        bookingNumber: tools.bookingNumber
+      inputParameters:
+      - name: containerIds
+        type: string
+        description: Comma-separated list of container numbers
+        required: true
+      - name: billOfLadingNumber
+        type: string
+        description: Filter by bill of lading number
+      - name: bookingNumber
+        type: string
+        description: Filter by booking number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getshipment
+      description: Get shipment by bill of lading
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.getshipment
+      with:
+        billOfLadingNumber: tools.billOfLadingNumber
+      inputParameters:
+      - name: billOfLadingNumber
+        type: string
+        description: Bill of lading number
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchvesselschedules
+      description: Search vessel schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.searchvesselschedules
+      with:
+        originPort: tools.originPort
+        destinationPort: tools.destinationPort
+        carrierId: tools.carrierId
+        departureFrom: tools.departureFrom
+        departureTo: tools.departureTo
+        limit: tools.limit
+      inputParameters:
+      - name: originPort
+        type: string
+        description: Origin port UN/LOCODE (e.g., USNYC)
+      - name: destinationPort
+        type: string
+        description: Destination port UN/LOCODE
+      - name: carrierId
+        type: string
+        description: Carrier SCAC code
+      - name: departureFrom
+        type: string
+        description: departureFrom
+      - name: departureTo
+        type: string
+        description: departureTo
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getvesselposition
+      description: Get vessel position
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.getvesselposition
+      with:
+        vesselIMO: tools.vesselIMO
+      inputParameters:
+      - name: vesselIMO
+        type: string
+        description: IMO vessel number
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createbooking
+      description: Create container booking
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cargosmart.createbooking
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listbookings
+      description: List bookings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.listbookings
+      with:
+        status: tools.status
+        carrierId: tools.carrierId
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      inputParameters:
+      - name: status
+        type: string
+        description: status
+      - name: carrierId
+        type: string
+        description: carrierId
+      - name: fromDate
+        type: string
+        description: fromDate
+      - name: toDate
+        type: string
+        description: toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getbilloflading
+      description: Get bill of lading
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cargosmart.getbilloflading
+      with:
+        blNumber: tools.blNumber
+      inputParameters:
+      - name: blNumber
+        type: string
+        description: blNumber
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    CARGOSMART_TOKEN: CARGOSMART_TOKEN
