@@ -13,7 +13,7 @@ description: >-
   visibility, schedule, and documentation workflows directly into
   TMS, ERP, and supply-chain platforms.
 type: Index
-x-type: company
+kind: company
 position: Consumer
 access: 3rd-Party
 image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
