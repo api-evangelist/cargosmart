@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CargoSmart Shipment Tracking API — Shipments
+  description: 'CargoSmart Shipment Tracking API — Shipments. 1 operations. Lead operation: Get shipment by bill of lading.
+    Self-contained Naftiko capability covering one Cargosmart business surface.'
+  tags:
+  - Cargosmart
+  - Shipments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CARGOSMART_API_KEY: CARGOSMART_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: shipment-tracking-shipments
+    baseUri: https://api.cargosmart.com
+    description: CargoSmart Shipment Tracking API — Shipments business capability. Self-contained, no shared references.
+    resources:
+    - name: tracking-v1-shipments-billOfLadingNumber
+      path: /tracking/v1/shipments/{billOfLadingNumber}
+      operations:
+      - name: getshipment
+        method: GET
+        description: Get shipment by bill of lading
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: billOfLadingNumber
+          in: path
+          type: string
+          description: Bill of lading number
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CARGOSMART_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: shipment-tracking-shipments-rest
+    port: 8080
+    description: REST adapter for CargoSmart Shipment Tracking API — Shipments. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/tracking/v1/shipments/{billofladingnumber}
+      name: tracking-v1-shipments-billofladingnumber
+      description: REST surface for tracking-v1-shipments-billOfLadingNumber.
+      operations:
+      - method: GET
+        name: getshipment
+        description: Get shipment by bill of lading
+        call: shipment-tracking-shipments.getshipment
+        with:
+          billOfLadingNumber: rest.billOfLadingNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: shipment-tracking-shipments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CargoSmart Shipment Tracking API — Shipments. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-shipment-bill-lading
+      description: Get shipment by bill of lading
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shipment-tracking-shipments.getshipment
+      with:
+        billOfLadingNumber: tools.billOfLadingNumber
+      outputParameters:
+      - type: object
+        mapping: $.

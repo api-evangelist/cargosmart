@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CargoSmart Shipment Tracking API — Vessels
+  description: 'CargoSmart Shipment Tracking API — Vessels. 2 operations. Lead operation: Search vessel schedules. Self-contained
+    Naftiko capability covering one Cargosmart business surface.'
+  tags:
+  - Cargosmart
+  - Vessels
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CARGOSMART_API_KEY: CARGOSMART_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: shipment-tracking-vessels
+    baseUri: https://api.cargosmart.com
+    description: CargoSmart Shipment Tracking API — Vessels business capability. Self-contained, no shared references.
+    resources:
+    - name: vessels-v1-schedules
+      path: /vessels/v1/schedules
+      operations:
+      - name: searchvesselschedules
+        method: GET
+        description: Search vessel schedules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: originPort
+          in: query
+          type: string
+          description: Origin port UN/LOCODE (e.g., USNYC)
+        - name: destinationPort
+          in: query
+          type: string
+          description: Destination port UN/LOCODE
+        - name: carrierId
+          in: query
+          type: string
+          description: Carrier SCAC code
+        - name: departureFrom
+          in: query
+          type: string
+        - name: departureTo
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    - name: vessels-v1-vesselIMO-position
+      path: /vessels/v1/{vesselIMO}/position
+      operations:
+      - name: getvesselposition
+        method: GET
+        description: Get vessel position
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vesselIMO
+          in: path
+          type: string
+          description: IMO vessel number
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CARGOSMART_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: shipment-tracking-vessels-rest
+    port: 8080
+    description: REST adapter for CargoSmart Shipment Tracking API — Vessels. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/vessels/v1/schedules
+      name: vessels-v1-schedules
+      description: REST surface for vessels-v1-schedules.
+      operations:
+      - method: GET
+        name: searchvesselschedules
+        description: Search vessel schedules
+        call: shipment-tracking-vessels.searchvesselschedules
+        with:
+          originPort: rest.originPort
+          destinationPort: rest.destinationPort
+          carrierId: rest.carrierId
+          departureFrom: rest.departureFrom
+          departureTo: rest.departureTo
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vessels/v1/{vesselimo}/position
+      name: vessels-v1-vesselimo-position
+      description: REST surface for vessels-v1-vesselIMO-position.
+      operations:
+      - method: GET
+        name: getvesselposition
+        description: Get vessel position
+        call: shipment-tracking-vessels.getvesselposition
+        with:
+          vesselIMO: rest.vesselIMO
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: shipment-tracking-vessels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CargoSmart Shipment Tracking API — Vessels. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: search-vessel-schedules
+      description: Search vessel schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shipment-tracking-vessels.searchvesselschedules
+      with:
+        originPort: tools.originPort
+        destinationPort: tools.destinationPort
+        carrierId: tools.carrierId
+        departureFrom: tools.departureFrom
+        departureTo: tools.departureTo
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vessel-position
+      description: Get vessel position
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shipment-tracking-vessels.getvesselposition
+      with:
+        vesselIMO: tools.vesselIMO
+      outputParameters:
+      - type: object
+        mapping: $.
