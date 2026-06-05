@@ -1,12 +1,12 @@
 # CargoSmart (cargosmart)
+
 CargoSmart (now operating as IQAX) is a global shipment management software provider that gives shippers, consignees, freight forwarders, and logistics service providers ocean freight booking, container tracking, vessel scheduling, and shipping documentation tools across multiple ocean carriers. CargoSmart co-founded the Global Shipping Business Network (GSBN), a blockchain-based data exchange for carriers, terminals, banks, and customs authorities, and exposes its APIs so trading partners can embed booking, visibility, schedule, and documentation workflows directly into TMS, ERP, and supply-chain platforms.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/apis.yml)
 
 ## Scope
 
 - **Type:** Index
-- **x-type:** company
 - **Position:** Consumer
 - **Access:** 3rd-Party
 
@@ -27,99 +27,119 @@ CargoSmart (now operating as IQAX) is a global shipment management software prov
 - Visibility
 - Vessel
 
-## Overview
+## Timestamps
 
-CargoSmart Limited has been a long-running provider of shipment management services and is the technology partner behind the Global Shipping Business Network (GSBN) - a blockchain data exchange initially backed by nine shipping industry leaders including COSCO, OOCL, CMA CGM, Hapag-Lloyd, and major port terminals. The company has rebranded several of its offerings under IQAX for digital trade and cargo release applications. CargoSmart's platform surfaces four related API areas: container booking, real-time shipment tracking (with an AsyncAPI event stream), vessel schedules, and shipping documentation exchange. The repo ships OpenAPI, AsyncAPI, JSON Schema, and JSON-LD artifacts that downstream consumers can use to model container and booking entities.
+- **Created:** 2025-01-15
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### CargoSmart Container Booking API
+
 The CargoSmart Container Booking API enables programmatic submission of container booking requests across multiple ocean carriers. APIs support booking creation, amendment, cancellation, and confirmation workflows for shippers, NVOCCs, and logistics service providers.
 
-**Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
-**Base URL:** https://api.cargosmart.com
+- **Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+- **Base URL:** `https://api.cargosmart.com`
 
-#### Features
-- Multi-carrier container booking submission
-- Booking creation, amendment, and cancellation
-- Acknowledgment and confirmation callbacks
-- Shipper, NVOCC, and LSP role support
-- Integration with carrier back-ends via CargoSmart
+#### Tags
 
-#### Use Cases
-- Shipper TMS booking automation
-- NVOCC consolidation booking
-- Freight forwarder tender flow
-- Enterprise ERP-to-carrier booking integration
+- Booking
+- Container
+- Logistics
+- Maritime
+- Ocean Freight
+- Shipping
+
+#### Properties
+
+- [Documentation](https://www.cargosmart.com/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/cargosmart-shipment-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/cargosmart-shipment-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### CargoSmart Shipment Tracking API
-Real-time container tracking and shipment visibility across ocean carriers and ports. Returns container movement events, vessel positions, ETA predictions, and port arrival/departure data. An accompanying AsyncAPI channel emits milestone events so subscribers can react without polling.
 
-**Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms. An accompanying AsyncAPI channel emits milestone events so subscribers can react without polling.
 
-#### Features
-- Real-time container movement events
-- Vessel position and ETA predictions
-- Port arrival/departure milestones
-- AsyncAPI event channel for push delivery
-- Cross-carrier normalized schema
-- Exception and delay detection
+- **Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+- **Base URL:** `https://api.cargosmart.com`
 
-#### Use Cases
-- Supply-chain visibility platforms
-- Customer self-service tracking portals
-- Proactive exception management and ETA-based allocation
-- Carrier performance analytics
+#### Tags
+
+- Container
+- Logistics
+- Maritime
+- Shipping
+- Tracking
+- Visibility
+
+#### Properties
+
+- [Documentation](https://www.cargosmart.com/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- [Postman Collection](collections/cargosmart-shipment-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/cargosmart-shipment-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### CargoSmart Vessel Schedule API
-Ocean carrier vessel schedules, port rotation data, and sailing frequency information. Supports route planning, transit time calculation, and carrier selection.
 
-**Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+The CargoSmart Vessel Schedule API provides access to ocean carrier vessel schedules, port rotation data, and sailing frequency information. APIs support route planning, transit time calculation, and carrier selection for ocean freight shippers and forwarders.
 
-#### Features
-- Carrier vessel schedule lookup
-- Port rotation and sailing frequency data
-- Transit time calculation by lane
-- Multi-carrier normalized schema
+- **Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+- **Base URL:** `https://api.cargosmart.com`
 
-#### Use Cases
-- Route planning and carrier selection
-- Transit time SLAs for customer quotes
-- Sailing calendar feeds in TMS platforms
+#### Tags
+
+- Logistics
+- Maritime
+- Port
+- Schedule
+- Shipping
+- Vessel
+
+#### Properties
+
+- [Documentation](https://www.cargosmart.com/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/cargosmart-shipment-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/cargosmart-shipment-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### CargoSmart Shipping Documentation API
-Electronic exchange of shipping documents including bills of lading, cargo manifests, and customs declarations via API and EDI.
 
-**Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+The CargoSmart Shipping Documentation API enables electronic exchange of shipping documents including bills of lading, cargo manifests, and customs declarations. APIs and EDI integrations support paperless documentation workflows across carriers, ports, customs authorities, and logistics service providers.
 
-#### Features
-- Bill of lading and manifest exchange
-- Customs declaration integration
-- API plus EDI support
-- GSBN-aligned document workflows
+- **Human URL:** [https://www.cargosmart.com/](https://www.cargosmart.com/)
+- **Base URL:** `https://api.cargosmart.com`
 
-#### Use Cases
-- Paperless carrier documentation
-- Port and customs authority integration
-- LSP document hub aggregation
+#### Tags
+
+- Bill of Lading
+- Container
+- Documentation
+- EDI
+- Maritime
+- Shipping
+
+#### Properties
+
+- [Documentation](https://www.cargosmart.com/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/cargosmart-shipment-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/cargosmart-shipment-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
 - [Website](https://www.cargosmart.com)
 - [Portal](https://www.cargosmart.com/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml)
-- [Container JSON Schema](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json)
-- [Booking JSON Schema](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json)
-- [JSON-LD Context](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-ld/cargosmart-context.jsonld)
-- [GSBN](https://www.gsbn.trade/)
-- [IQAX](https://www.iqax.com/)
+- [Documentation](https://www.cargosmart.com/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/openapi/cargosmart-shipment-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-container-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-schema/cargosmart-booking-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/json-ld/cargosmart-context.jsonld)
+- [G S B N](https://www.gsbn.trade/)
+- [I Q A X](https://www.iqax.com/)
 - [LinkedIn](https://www.linkedin.com/company/cargosmart-limited/)
-
-## Timestamps
-
-- **Created:** 2025-01-15
-- **Modified:** 2026-04-23
 
 ## Maintainers
 
