@@ -1,0 +1,258 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CargoSmart Shipment Tracking API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/containers/:containerId",
+            "params": [
+              {
+                "name": "containerId",
+                "value": "",
+                "type": "path",
+                "description": "Container number (e.g., MSCU1234567)"
+              }
+            ]
+          },
+          "docs": "Retrieve real-time tracking information and event history for a specific container number. Returns vessel position, port events, ETA, and container status across carriers."
+        },
+        {
+          "info": {
+            "name": "Track multiple containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/containers",
+            "params": [
+              {
+                "name": "containerIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of container numbers"
+              },
+              {
+                "name": "billOfLadingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by bill of lading number"
+              },
+              {
+                "name": "bookingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by booking number"
+              }
+            ]
+          },
+          "docs": "Retrieve tracking status for multiple containers in a single request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get shipment by bill of lading",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/shipments/:billOfLadingNumber",
+            "params": [
+              {
+                "name": "billOfLadingNumber",
+                "value": "",
+                "type": "path",
+                "description": "Bill of lading number"
+              }
+            ]
+          },
+          "docs": "Retrieve shipment details and container list for a bill of lading number."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Vessels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search vessel schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/vessels/v1/schedules",
+            "params": [
+              {
+                "name": "originPort",
+                "value": "",
+                "type": "query",
+                "description": "Origin port UN/LOCODE (e.g., USNYC)"
+              },
+              {
+                "name": "destinationPort",
+                "value": "",
+                "type": "query",
+                "description": "Destination port UN/LOCODE"
+              },
+              {
+                "name": "carrierId",
+                "value": "",
+                "type": "query",
+                "description": "Carrier SCAC code"
+              },
+              {
+                "name": "departureFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "departureTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search ocean carrier vessel schedules by origin and destination port, carrier, or date range."
+        },
+        {
+          "info": {
+            "name": "Get vessel position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/vessels/v1/:vesselIMO/position",
+            "params": [
+              {
+                "name": "vesselIMO",
+                "value": "",
+                "type": "path",
+                "description": "IMO vessel number"
+              }
+            ]
+          },
+          "docs": "Get the current AIS-based position of a vessel by IMO number."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bookings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bookings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/bookings/v1",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "carrierId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of container bookings."
+        },
+        {
+          "info": {
+            "name": "Create container booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cargosmart.com/bookings/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a new container booking request to an ocean carrier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get bill of lading",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/documents/v1/bills-of-lading/:blNumber",
+            "params": [
+              {
+                "name": "blNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve electronic bill of lading document details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

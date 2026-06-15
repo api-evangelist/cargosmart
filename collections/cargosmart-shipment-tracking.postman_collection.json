@@ -1,0 +1,1235 @@
+{
+  "item": [
+    {
+      "id": "d4ffd965-edd3-4372-917c-ed1075476244",
+      "name": "Bookings",
+      "description": {
+        "content": "Container booking management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "26a566a6-12c9-4dc7-98d2-daec64e83430",
+          "name": "Create container booking",
+          "request": {
+            "name": "Create container booking",
+            "description": {
+              "content": "Submit a new container booking request to an ocean carrier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"taxId\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"taxId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89d2be06-370c-4d33-8b7c-293d0f26d9ee",
+              "name": "Booking submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"bookingNumber\": \"string\",\n  \"carrierCode\": \"string\",\n  \"status\": \"Cancelled\",\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"requestedDepartureDate\": \"2013-08-28\",\n  \"confirmedVessel\": \"string\",\n  \"confirmedVoyage\": \"string\",\n  \"containers\": [\n    {\n      \"containerType\": \"20GP\",\n      \"quantity\": 1618\n    },\n    {\n      \"containerType\": \"20RF\",\n      \"quantity\": 8557\n    }\n  ],\n  \"createdAt\": \"1998-06-28T01:52:03.543Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6faf6982-4e2a-4b7b-b79f-752ba3081bcb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e3564e-6dcd-472c-ac46-73e7e0ab223d",
+          "name": "List bookings",
+          "request": {
+            "name": "List bookings",
+            "description": {
+              "content": "Retrieve a list of container bookings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrierId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2198cf98-4927-456d-be76-836402fff5a6",
+              "name": "List of bookings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrierId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"bookingId\": \"string\",\n      \"bookingNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"status\": \"Cancelled\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"requestedDepartureDate\": \"1981-07-21\",\n      \"confirmedVessel\": \"string\",\n      \"confirmedVoyage\": \"string\",\n      \"containers\": [\n        {\n          \"containerType\": \"40GP\",\n          \"quantity\": 2989\n        },\n        {\n          \"containerType\": \"45HC\",\n          \"quantity\": 3234\n        }\n      ],\n      \"createdAt\": \"1980-09-22T18:18:36.459Z\"\n    },\n    {\n      \"bookingId\": \"string\",\n      \"bookingNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"status\": \"Cancelled\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"requestedDepartureDate\": \"2019-11-28\",\n      \"confirmedVessel\": \"string\",\n      \"confirmedVoyage\": \"string\",\n      \"containers\": [\n        {\n          \"containerType\": \"40RF\",\n          \"quantity\": 2528\n        },\n        {\n          \"containerType\": \"40RF\",\n          \"quantity\": 7734\n        }\n      ],\n      \"createdAt\": \"2002-09-04T18:02:29.572Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "451c1db2-195b-41ee-8dee-631a206cd4b3",
+      "name": "Containers",
+      "description": {
+        "content": "Container tracking and event history",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "764b7d24-5adb-49cc-aaca-53024be980bc",
+          "name": "Track container",
+          "request": {
+            "name": "Track container",
+            "description": {
+              "content": "Retrieve real-time tracking information and event history for a specific container number. Returns vessel position, port events, ETA, and container status across carriers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "v1",
+                "containers",
+                ":containerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "containerId",
+                  "description": "(Required) Container number (e.g., MSCU1234567)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3de2689-288d-4278-8487-81bcc8ce126a",
+              "name": "Container tracking details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "containers",
+                    ":containerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerId",
+                      "description": "(Required) Container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"containerId\": \"string\",\n  \"containerType\": \"40HC\",\n  \"carrierCode\": \"string\",\n  \"vesselName\": \"string\",\n  \"voyageNumber\": \"string\",\n  \"currentStatus\": \"Delivered\",\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"estimatedArrival\": \"1966-02-13T04:45:58.120Z\",\n  \"actualArrival\": \"1973-02-04T05:53:41.099Z\",\n  \"events\": [\n    {\n      \"eventId\": \"string\",\n      \"eventType\": \"Discharge\",\n      \"description\": \"string\",\n      \"location\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"vesselName\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"eventTime\": \"1951-05-08T14:48:05.300Z\",\n      \"isActual\": false\n    },\n    {\n      \"eventId\": \"string\",\n      \"eventType\": \"Arrival\",\n      \"description\": \"string\",\n      \"location\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"vesselName\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"eventTime\": \"1970-02-15T22:55:38.219Z\",\n      \"isActual\": false\n    }\n  ],\n  \"lastUpdated\": \"1966-10-22T12:42:14.334Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22d59975-a9ae-4c8f-a798-72e3257393d9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "containers",
+                    ":containerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerId",
+                      "description": "(Required) Container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2322354-fa3e-4db0-8dcd-802ef22a3983",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "containers",
+                    ":containerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerId",
+                      "description": "(Required) Container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c87bbbe5-896f-4022-8de9-0907c8b2da73",
+          "name": "Track multiple containers",
+          "request": {
+            "name": "Track multiple containers",
+            "description": {
+              "content": "Retrieve tracking status for multiple containers in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "v1",
+                "containers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "containerIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of container numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "billOfLadingNumber",
+                  "value": "<string>",
+                  "description": "Filter by bill of lading number"
+                },
+                {
+                  "disabled": false,
+                  "key": "bookingNumber",
+                  "value": "<string>",
+                  "description": "Filter by booking number"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "128f3e7f-a321-49cd-829b-b48565339ced",
+              "name": "Container tracking results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "containerIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billOfLadingNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookingNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"20RF\",\n      \"carrierCode\": \"string\",\n      \"vesselName\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"currentStatus\": \"InTransit\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"estimatedArrival\": \"1956-01-06T21:48:03.240Z\",\n      \"actualArrival\": \"2017-11-29T06:23:43.467Z\",\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"eventType\": \"Load\",\n          \"description\": \"string\",\n          \"location\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"vesselName\": \"string\",\n          \"voyageNumber\": \"string\",\n          \"eventTime\": \"1952-05-04T18:02:26.595Z\",\n          \"isActual\": false\n        },\n        {\n          \"eventId\": \"string\",\n          \"eventType\": \"Departure\",\n          \"description\": \"string\",\n          \"location\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"vesselName\": \"string\",\n          \"voyageNumber\": \"string\",\n          \"eventTime\": \"1962-04-10T10:25:03.558Z\",\n          \"isActual\": true\n        }\n      ],\n      \"lastUpdated\": \"2018-12-11T15:16:08.806Z\"\n    },\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"45HC\",\n      \"carrierCode\": \"string\",\n      \"vesselName\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"currentStatus\": \"AtPort\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"estimatedArrival\": \"1962-02-11T11:38:27.377Z\",\n      \"actualArrival\": \"2021-04-28T00:51:13.125Z\",\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"eventType\": \"Delivery\",\n          \"description\": \"string\",\n          \"location\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"vesselName\": \"string\",\n          \"voyageNumber\": \"string\",\n          \"eventTime\": \"2009-10-22T01:04:28.029Z\",\n          \"isActual\": false\n        },\n        {\n          \"eventId\": \"string\",\n          \"eventType\": \"GateOut\",\n          \"description\": \"string\",\n          \"location\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"vesselName\": \"string\",\n          \"voyageNumber\": \"string\",\n          \"eventTime\": \"2001-06-05T17:28:11.256Z\",\n          \"isActual\": true\n        }\n      ],\n      \"lastUpdated\": \"1984-08-22T05:42:20.577Z\"\n    }\n  ],\n  \"total\": 9581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "32d52730-5e6f-4bbc-8a93-f54a5601d90c",
+      "name": "Documents",
+      "description": {
+        "content": "Shipping documentation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d3b5fb9-204c-4d69-b458-4f545580f7d6",
+          "name": "Get bill of lading",
+          "request": {
+            "name": "Get bill of lading",
+            "description": {
+              "content": "Retrieve electronic bill of lading document details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "v1",
+                "bills-of-lading",
+                ":blNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2b972eb-f7d4-4d80-96b3-36ab750aa6ee",
+              "name": "Bill of lading details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "v1",
+                    "bills-of-lading",
+                    ":blNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blNumber\": \"string\",\n  \"blType\": \"Original\",\n  \"carrierCode\": \"string\",\n  \"issueDate\": \"1996-07-08\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"vesselName\": \"string\",\n  \"voyageNumber\": \"string\",\n  \"containers\": [\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    },\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    }\n  ],\n  \"cargoDescription\": \"string\",\n  \"grossWeight\": 7649.754052646968,\n  \"weightUnit\": \"string\",\n  \"freightTerms\": \"Collect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "115b47bd-ba7e-4b5c-af17-8645e86e01d3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "v1",
+                    "bills-of-lading",
+                    ":blNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "72d0c387-157d-4d0c-8936-ada6d0c18e89",
+      "name": "Shipments",
+      "description": {
+        "content": "Shipment visibility and status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82c083e4-1707-48e8-8031-022be99511b7",
+          "name": "Get shipment by bill of lading",
+          "request": {
+            "name": "Get shipment by bill of lading",
+            "description": {
+              "content": "Retrieve shipment details and container list for a bill of lading number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "v1",
+                "shipments",
+                ":billOfLadingNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "billOfLadingNumber",
+                  "description": "(Required) Bill of lading number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e191eb09-02ca-4dd7-a0c2-2ac80a82bcb7",
+              "name": "Shipment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments",
+                    ":billOfLadingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billOfLadingNumber",
+                      "description": "(Required) Bill of lading number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billOfLadingNumber\": \"string\",\n  \"bookingNumber\": \"string\",\n  \"carrierCode\": \"string\",\n  \"carrierName\": \"string\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"containers\": [\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    },\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    }\n  ],\n  \"cargoDescription\": \"string\",\n  \"grossWeight\": 7022.1588397799205,\n  \"weightUnit\": \"KG\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bf47cdb-02fa-4a97-8377-64ec74f39acb",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments",
+                    ":billOfLadingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billOfLadingNumber",
+                      "description": "(Required) Bill of lading number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "591095d8-125f-4bfc-a1b6-02f97cdbf398",
+      "name": "Vessels",
+      "description": {
+        "content": "Vessel position and schedule",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16b8d9c0-5808-43a1-b902-a0dedbe29424",
+          "name": "Search vessel schedules",
+          "request": {
+            "name": "Search vessel schedules",
+            "description": {
+              "content": "Search ocean carrier vessel schedules by origin and destination port, carrier, or date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vessels",
+                "v1",
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "originPort",
+                  "value": "<string>",
+                  "description": "Origin port UN/LOCODE (e.g., USNYC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationPort",
+                  "value": "<string>",
+                  "description": "Destination port UN/LOCODE"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrierId",
+                  "value": "<string>",
+                  "description": "Carrier SCAC code"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureFrom",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureTo",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc6c2be8-c7f6-4eff-83e5-d042782edc02",
+              "name": "Vessel schedules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vessels",
+                    "v1",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "originPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrierId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departureFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "departureTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"scheduleId\": \"string\",\n      \"vesselName\": \"string\",\n      \"vesselIMO\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"carrierName\": \"string\",\n      \"route\": [\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1954-05-23T07:28:38.588Z\",\n          \"estimatedDeparture\": \"2015-09-06T17:09:32.967Z\"\n        },\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1993-03-27T09:12:22.436Z\",\n          \"estimatedDeparture\": \"1978-03-03T21:42:06.908Z\"\n        }\n      ],\n      \"transitDays\": 6001,\n      \"directService\": true\n    },\n    {\n      \"scheduleId\": \"string\",\n      \"vesselName\": \"string\",\n      \"vesselIMO\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"carrierName\": \"string\",\n      \"route\": [\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1980-12-31T12:27:16.896Z\",\n          \"estimatedDeparture\": \"2014-01-03T12:31:23.480Z\"\n        },\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1968-03-22T17:50:37.245Z\",\n          \"estimatedDeparture\": \"2004-09-28T20:29:55.962Z\"\n        }\n      ],\n      \"transitDays\": 2222,\n      \"directService\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a376f418-d2d0-4771-aac0-d7685d58e7ff",
+          "name": "Get vessel position",
+          "request": {
+            "name": "Get vessel position",
+            "description": {
+              "content": "Get the current AIS-based position of a vessel by IMO number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vessels",
+                "v1",
+                ":vesselIMO",
+                "position"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vesselIMO",
+                  "description": "(Required) IMO vessel number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87cf1287-0869-441b-92ee-c9e929e49cb0",
+              "name": "Vessel position",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vessels",
+                    "v1",
+                    ":vesselIMO",
+                    "position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vesselIMO",
+                      "description": "(Required) IMO vessel number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vesselIMO\": \"string\",\n  \"vesselName\": \"string\",\n  \"latitude\": -51.08274085229453,\n  \"longitude\": 109.8072214016654,\n  \"speed\": 9572.890187585981,\n  \"heading\": 79.60969799239344,\n  \"destination\": \"string\",\n  \"eta\": \"1985-10-10T02:53:21.897Z\",\n  \"timestamp\": \"2006-12-25T23:16:33.015Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargosmart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72dc19f2-2dfb-48fc-b12a-40ddb979926b",
+    "name": "CargoSmart Shipment Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.\n\nContact Support:\n Name: CargoSmart",
+      "type": "text/plain"
+    }
+  }
+}
