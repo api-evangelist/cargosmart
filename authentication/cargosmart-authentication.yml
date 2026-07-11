@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cargosmart-shipment-tracking-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.cargosmart.com/oauth/token
+    scopes: 4
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml
