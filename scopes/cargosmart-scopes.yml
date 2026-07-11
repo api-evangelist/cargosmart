@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cargosmart-shipment-tracking-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/cargosmart-shipment-tracking-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.cargosmart.com/oauth/token
+scopes:
+- scope: bookings:read
+  description: Read booking data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml
+- scope: bookings:write
+  description: Create and manage bookings
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml
+- scope: documents:read
+  description: Read shipping documents
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml
+- scope: tracking:read
+  description: Read shipment tracking data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/cargosmart-shipment-tracking-openapi.yml

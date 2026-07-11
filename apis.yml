@@ -166,6 +166,8 @@ apis:
       - Port and customs authority integration
       - LSP document hub aggregation
 common:
+  - type: OAuthScopes
+    url: scopes/cargosmart-scopes.yml
   - url: https://www.cargosmart.com
     type: Website
   - url: https://www.cargosmart.com/
