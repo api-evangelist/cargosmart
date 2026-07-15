@@ -166,6 +166,8 @@ apis:
       - Port and customs authority integration
       - LSP document hub aggregation
 common:
+  - type: AgenticAccess
+    url: agentic-access/cargosmart-agentic-access.yml
   - type: DomainSecurity
     url: security/cargosmart-domain-security.yml
   - type: Authentication
