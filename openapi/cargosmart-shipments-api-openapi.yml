@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: CargoSmart Shipment Tracking Bookings Shipments API
+  description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
+  version: 1.0.0
+  contact:
+    name: CargoSmart
+    url: https://www.cargosmart.com/
+servers:
+- url: https://api.cargosmart.com
+  description: CargoSmart Production API
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Shipments
+  description: Shipment visibility and status
+paths:
+  /tracking/v1/shipments/{billOfLadingNumber}:
+    get:
+      operationId: getShipment
+      summary: Get shipment by bill of lading
+      description: Retrieve shipment details and container list for a bill of lading number.
+      tags:
+      - Shipments
+      parameters:
+      - name: billOfLadingNumber
+        in: path
+        required: true
+        description: Bill of lading number
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Shipment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
+    Shipment:
+      type: object
+      properties:
+        billOfLadingNumber:
+          type: string
+        bookingNumber:
+          type: string
+        carrierCode:
+          type: string
+        carrierName:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/Party'
+        consignee:
+          $ref: '#/components/schemas/Party'
+        notifyParty:
+          $ref: '#/components/schemas/Party'
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerId:
+                type: string
+              containerType:
+                type: string
+              sealNumber:
+                type: string
+        cargoDescription:
+          type: string
+        grossWeight:
+          type: number
+        weightUnit:
+          type: string
+          enum:
+          - KG
+          - LB
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.cargosmart.com/oauth/token
+          scopes:
+            tracking:read: Read shipment tracking data
+            bookings:read: Read booking data
+            bookings:write: Create and manage bookings
+            documents:read: Read shipping documents

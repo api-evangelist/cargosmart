@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: CargoSmart Shipment Tracking Bookings Vessels API
+  description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
+  version: 1.0.0
+  contact:
+    name: CargoSmart
+    url: https://www.cargosmart.com/
+servers:
+- url: https://api.cargosmart.com
+  description: CargoSmart Production API
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Vessels
+  description: Vessel position and schedule
+paths:
+  /vessels/v1/schedules:
+    get:
+      operationId: searchVesselSchedules
+      summary: Search vessel schedules
+      description: Search ocean carrier vessel schedules by origin and destination port, carrier, or date range.
+      tags:
+      - Vessels
+      parameters:
+      - name: originPort
+        in: query
+        description: Origin port UN/LOCODE (e.g., USNYC)
+        schema:
+          type: string
+          pattern: ^[A-Z]{5}$
+      - name: destinationPort
+        in: query
+        description: Destination port UN/LOCODE
+        schema:
+          type: string
+          pattern: ^[A-Z]{5}$
+      - name: carrierId
+        in: query
+        description: Carrier SCAC code
+        schema:
+          type: string
+      - name: departureFrom
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: departureTo
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: Vessel schedules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VesselScheduleList'
+  /vessels/v1/{vesselIMO}/position:
+    get:
+      operationId: getVesselPosition
+      summary: Get vessel position
+      description: Get the current AIS-based position of a vessel by IMO number.
+      tags:
+      - Vessels
+      parameters:
+      - name: vesselIMO
+        in: path
+        required: true
+        description: IMO vessel number
+        schema:
+          type: string
+          pattern: ^\d{7}$
+      responses:
+        '200':
+          description: Vessel position
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VesselPosition'
+components:
+  schemas:
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
+    VesselPosition:
+      type: object
+      properties:
+        vesselIMO:
+          type: string
+        vesselName:
+          type: string
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+        speed:
+          type: number
+          description: Speed over ground in knots
+        heading:
+          type: number
+          minimum: 0
+          maximum: 360
+        destination:
+          type: string
+        eta:
+          type: string
+          format: date-time
+        timestamp:
+          type: string
+          format: date-time
+    VesselSchedule:
+      type: object
+      properties:
+        scheduleId:
+          type: string
+        vesselName:
+          type: string
+        vesselIMO:
+          type: string
+        voyageNumber:
+          type: string
+        carrierCode:
+          type: string
+        carrierName:
+          type: string
+        route:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                $ref: '#/components/schemas/Port'
+              estimatedArrival:
+                type: string
+                format: date-time
+              estimatedDeparture:
+                type: string
+                format: date-time
+        transitDays:
+          type: integer
+        directService:
+          type: boolean
+    VesselScheduleList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VesselSchedule'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.cargosmart.com/oauth/token
+          scopes:
+            tracking:read: Read shipment tracking data
+            bookings:read: Read booking data
+            bookings:write: Create and manage bookings
+            documents:read: Read shipping documents

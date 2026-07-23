@@ -1,0 +1,233 @@
+openapi: 3.1.0
+info:
+  title: CargoSmart Shipment Tracking Bookings API
+  description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
+  version: 1.0.0
+  contact:
+    name: CargoSmart
+    url: https://www.cargosmart.com/
+servers:
+- url: https://api.cargosmart.com
+  description: CargoSmart Production API
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Bookings
+  description: Container booking management
+paths:
+  /bookings/v1:
+    post:
+      operationId: createBooking
+      summary: Create container booking
+      description: Submit a new container booking request to an ocean carrier.
+      tags:
+      - Bookings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Booking submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    get:
+      operationId: listBookings
+      summary: List bookings
+      description: Retrieve a list of container bookings.
+      tags:
+      - Bookings
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - Submitted
+          - Confirmed
+          - Amended
+          - Cancelled
+      - name: carrierId
+        in: query
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingList'
+components:
+  schemas:
+    BookingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Booking'
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
+    BookingRequest:
+      type: object
+      required:
+      - carrierCode
+      - originPort
+      - destinationPort
+      - requestedDepartureDate
+      - containers
+      properties:
+        carrierCode:
+          type: string
+          description: Ocean carrier SCAC code
+        originPort:
+          type: string
+          description: UN/LOCODE of origin port
+        destinationPort:
+          type: string
+          description: UN/LOCODE of destination port
+        requestedDepartureDate:
+          type: string
+          format: date
+        containers:
+          type: array
+          items:
+            type: object
+            required:
+            - containerType
+            - quantity
+            properties:
+              containerType:
+                type: string
+                enum:
+                - 20GP
+                - 40GP
+                - 40HC
+                - 20RF
+                - 40RF
+                - 45HC
+              quantity:
+                type: integer
+                minimum: 1
+        cargoDescription:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/Party'
+        consignee:
+          $ref: '#/components/schemas/Party'
+    Booking:
+      type: object
+      properties:
+        bookingId:
+          type: string
+        bookingNumber:
+          type: string
+        carrierCode:
+          type: string
+        status:
+          type: string
+          enum:
+          - Submitted
+          - Confirmed
+          - Amended
+          - Cancelled
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        requestedDepartureDate:
+          type: string
+          format: date
+        confirmedVessel:
+          type: string
+        confirmedVoyage:
+          type: string
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerType:
+                type: string
+                enum:
+                - 20GP
+                - 40GP
+                - 40HC
+                - 20RF
+                - 40RF
+                - 45HC
+              quantity:
+                type: integer
+        createdAt:
+          type: string
+          format: date-time
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.cargosmart.com/oauth/token
+          scopes:
+            tracking:read: Read shipment tracking data
+            bookings:read: Read booking data
+            bookings:write: Create and manage bookings
+            documents:read: Read shipping documents
