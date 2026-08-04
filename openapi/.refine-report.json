@@ -1,0 +1,22 @@
+{
+  "provider": "cargosmart",
+  "sources": [
+    "cargosmart-bookings-api-openapi.yml",
+    "cargosmart-containers-api-openapi.yml",
+    "cargosmart-documents-api-openapi.yml",
+    "cargosmart-shipments-api-openapi.yml",
+    "cargosmart-vessels-api-openapi.yml"
+  ],
+  "outputs": [
+    "cargosmart-bookings-api-openapi.yml",
+    "cargosmart-containers-api-openapi.yml",
+    "cargosmart-documents-api-openapi.yml",
+    "cargosmart-shipments-api-openapi.yml",
+    "cargosmart-vessels-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
