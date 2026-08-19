@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CargoSmart Shipment Tracking Bookings Containers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/containers/:containerId",
+            "params": [
+              {
+                "name": "containerId",
+                "value": "",
+                "type": "path",
+                "description": "Container number (e.g., MSCU1234567)"
+              }
+            ]
+          },
+          "docs": "Retrieve real-time tracking information and event history for a specific container number. Returns vessel position, port events, ETA, and container status across carriers."
+        },
+        {
+          "info": {
+            "name": "Track multiple containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/containers",
+            "params": [
+              {
+                "name": "containerIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of container numbers"
+              },
+              {
+                "name": "billOfLadingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by bill of lading number"
+              },
+              {
+                "name": "bookingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by booking number"
+              }
+            ]
+          },
+          "docs": "Retrieve tracking status for multiple containers in a single request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,203 @@
+{
+  "item": [
+    {
+      "id": "2d6873ef-c8de-45f4-9493-31837f226001",
+      "name": "Documents",
+      "description": {
+        "content": "Shipping documentation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "835859ef-0e53-4c01-997e-c643c3043192",
+          "name": "Get bill of lading",
+          "request": {
+            "name": "Get bill of lading",
+            "description": {
+              "content": "Retrieve electronic bill of lading document details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "v1",
+                "bills-of-lading",
+                ":blNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c41ab595-1b37-40a1-a7cd-5c7f76638331",
+              "name": "Bill of lading details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "v1",
+                    "bills-of-lading",
+                    ":blNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blNumber\": \"string\",\n  \"blType\": \"Electronic\",\n  \"carrierCode\": \"string\",\n  \"issueDate\": \"1948-02-03\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"vesselName\": \"string\",\n  \"voyageNumber\": \"string\",\n  \"containers\": [\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    },\n    {\n      \"containerId\": \"string\",\n      \"containerType\": \"string\",\n      \"sealNumber\": \"string\"\n    }\n  ],\n  \"cargoDescription\": \"string\",\n  \"grossWeight\": 1538.5318122787116,\n  \"weightUnit\": \"string\",\n  \"freightTerms\": \"Collect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87de4d6b-293b-443d-bcca-445a3d00f789",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "v1",
+                    "bills-of-lading",
+                    ":blNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargosmart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "600752e2-3fd1-4223-a4e2-73f0654b23fb",
+    "name": "CargoSmart Shipment Tracking Bookings Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.\n\nContact Support:\n Name: CargoSmart",
+      "type": "text/plain"
+    }
+  }
+}

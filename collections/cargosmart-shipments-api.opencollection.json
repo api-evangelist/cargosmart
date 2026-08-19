@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CargoSmart Shipment Tracking Bookings Shipments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get shipment by bill of lading",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cargosmart.com/tracking/v1/shipments/:billOfLadingNumber",
+            "params": [
+              {
+                "name": "billOfLadingNumber",
+                "value": "",
+                "type": "path",
+                "description": "Bill of lading number"
+              }
+            ]
+          },
+          "docs": "Retrieve shipment details and container list for a bill of lading number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

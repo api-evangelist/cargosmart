@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "55f842d9-9628-4f57-9890-e5d31c38b26f",
+      "name": "Bookings",
+      "description": {
+        "content": "Container booking management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d90bfd9a-0404-43e8-8f85-2175638a547d",
+          "name": "Create container booking",
+          "request": {
+            "name": "Create container booking",
+            "description": {
+              "content": "Submit a new container booking request to an ocean carrier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"taxId\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"taxId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3ac8757-a1d5-44cf-9c26-010171d8efb9",
+              "name": "Booking submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"bookingNumber\": \"string\",\n  \"carrierCode\": \"string\",\n  \"status\": \"Amended\",\n  \"originPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"destinationPort\": {\n    \"locode\": \"string\",\n    \"portName\": \"string\",\n    \"countryCode\": \"string\",\n    \"terminalName\": \"string\"\n  },\n  \"requestedDepartureDate\": \"1950-12-05\",\n  \"confirmedVessel\": \"string\",\n  \"confirmedVoyage\": \"string\",\n  \"containers\": [\n    {\n      \"containerType\": \"40GP\",\n      \"quantity\": 1127\n    },\n    {\n      \"containerType\": \"20RF\",\n      \"quantity\": 5051\n    }\n  ],\n  \"createdAt\": \"2023-06-06T02:01:54.484Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f602714-e56e-4f8a-8644-bad03be08283",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierCode\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"requestedDepartureDate\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"cargoDescription\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"taxId\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "caa51915-ef1a-46f3-bb05-3bd7a1fb6caf",
+          "name": "List bookings",
+          "request": {
+            "name": "List bookings",
+            "description": {
+              "content": "Retrieve a list of container bookings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrierId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdc71d38-77bb-4b56-9821-f4c8b2f09593",
+              "name": "List of bookings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrierId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"bookingId\": \"string\",\n      \"bookingNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"status\": \"Confirmed\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"requestedDepartureDate\": \"1974-07-02\",\n      \"confirmedVessel\": \"string\",\n      \"confirmedVoyage\": \"string\",\n      \"containers\": [\n        {\n          \"containerType\": \"40GP\",\n          \"quantity\": 2249\n        },\n        {\n          \"containerType\": \"40HC\",\n          \"quantity\": 2062\n        }\n      ],\n      \"createdAt\": \"1946-10-24T03:41:03.976Z\"\n    },\n    {\n      \"bookingId\": \"string\",\n      \"bookingNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"status\": \"Confirmed\",\n      \"originPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"destinationPort\": {\n        \"locode\": \"string\",\n        \"portName\": \"string\",\n        \"countryCode\": \"string\",\n        \"terminalName\": \"string\"\n      },\n      \"requestedDepartureDate\": \"1994-10-09\",\n      \"confirmedVessel\": \"string\",\n      \"confirmedVoyage\": \"string\",\n      \"containers\": [\n        {\n          \"containerType\": \"40RF\",\n          \"quantity\": 4428\n        },\n        {\n          \"containerType\": \"40HC\",\n          \"quantity\": 4686\n        }\n      ],\n      \"createdAt\": \"1982-12-20T18:45:45.228Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargosmart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "edf8df36-3fae-4ece-80d4-a10c1c264f2b",
+    "name": "CargoSmart Shipment Tracking Bookings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.\n\nContact Support:\n Name: CargoSmart",
+      "type": "text/plain"
+    }
+  }
+}

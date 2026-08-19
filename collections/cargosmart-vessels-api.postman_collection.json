@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "df998c39-323e-4004-b00b-d35923db4247",
+      "name": "Vessels",
+      "description": {
+        "content": "Vessel position and schedule",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aaeac1ec-baf4-484e-bea5-f77023cf8c87",
+          "name": "Search vessel schedules",
+          "request": {
+            "name": "Search vessel schedules",
+            "description": {
+              "content": "Search ocean carrier vessel schedules by origin and destination port, carrier, or date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vessels",
+                "v1",
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "originPort",
+                  "value": "<string>",
+                  "description": "Origin port UN/LOCODE (e.g., USNYC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationPort",
+                  "value": "<string>",
+                  "description": "Destination port UN/LOCODE"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrierId",
+                  "value": "<string>",
+                  "description": "Carrier SCAC code"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureFrom",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureTo",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97e9ebc4-4185-4f0b-8aa5-c22ae6fc564e",
+              "name": "Vessel schedules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vessels",
+                    "v1",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "originPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrierId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departureFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "departureTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"scheduleId\": \"string\",\n      \"vesselName\": \"string\",\n      \"vesselIMO\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"carrierName\": \"string\",\n      \"route\": [\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1951-01-02T05:07:41.161Z\",\n          \"estimatedDeparture\": \"1966-06-12T20:39:38.526Z\"\n        },\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1974-02-16T14:36:05.533Z\",\n          \"estimatedDeparture\": \"1953-10-13T16:32:55.093Z\"\n        }\n      ],\n      \"transitDays\": 3087,\n      \"directService\": true\n    },\n    {\n      \"scheduleId\": \"string\",\n      \"vesselName\": \"string\",\n      \"vesselIMO\": \"string\",\n      \"voyageNumber\": \"string\",\n      \"carrierCode\": \"string\",\n      \"carrierName\": \"string\",\n      \"route\": [\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1998-03-02T15:18:54.757Z\",\n          \"estimatedDeparture\": \"1964-05-07T11:11:18.566Z\"\n        },\n        {\n          \"port\": {\n            \"locode\": \"string\",\n            \"portName\": \"string\",\n            \"countryCode\": \"string\",\n            \"terminalName\": \"string\"\n          },\n          \"estimatedArrival\": \"1956-03-26T08:42:29.773Z\",\n          \"estimatedDeparture\": \"2016-07-13T09:54:43.667Z\"\n        }\n      ],\n      \"transitDays\": 4339,\n      \"directService\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c55e48f-2282-41c4-955a-1bf385055d76",
+          "name": "Get vessel position",
+          "request": {
+            "name": "Get vessel position",
+            "description": {
+              "content": "Get the current AIS-based position of a vessel by IMO number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vessels",
+                "v1",
+                ":vesselIMO",
+                "position"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vesselIMO",
+                  "description": "(Required) IMO vessel number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9ef7d9a-2472-41d4-8a78-30aa71409756",
+              "name": "Vessel position",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vessels",
+                    "v1",
+                    ":vesselIMO",
+                    "position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vesselIMO",
+                      "description": "(Required) IMO vessel number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vesselIMO\": \"string\",\n  \"vesselName\": \"string\",\n  \"latitude\": 33.893074595792314,\n  \"longitude\": 153.92717392628282,\n  \"speed\": 1476.2954733955746,\n  \"heading\": 167.76150708130004,\n  \"destination\": \"string\",\n  \"eta\": \"2005-05-30T10:17:31.451Z\",\n  \"timestamp\": \"1953-07-15T12:56:02.922Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargosmart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0dfeb22-1244-412f-9829-4013696f8256",
+    "name": "CargoSmart Shipment Tracking Bookings Vessels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.\n\nContact Support:\n Name: CargoSmart",
+      "type": "text/plain"
+    }
+  }
+}
