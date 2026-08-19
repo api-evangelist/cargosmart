@@ -43,7 +43,7 @@ tags:
   - Vessel
 created: '2025-01-15'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: cargosmart:cargosmart-bookings-api
   name: CargoSmart Bookings API
