@@ -132,6 +132,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/asyncapi/cargosmart-events-asyncapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/cargosmart-capability-edges.yml
+    name: CargoSmart Business Capability Map
   - type: AgenticAccess
     url: agentic-access/cargosmart-agentic-access.yml
   - type: DomainSecurity
