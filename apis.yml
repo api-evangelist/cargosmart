@@ -36,7 +36,6 @@ accessModel:
   method: derived
 position: Consumer
 access: 3rd-Party
-image: https://raw.githubusercontent.com/api-evangelist/cargosmart/refs/heads/main/image.png
 tags:
   - Booking
   - Container
