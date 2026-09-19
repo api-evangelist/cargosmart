@@ -38,6 +38,21 @@ position: Consuming
 access: 3rd-Party
 tags:
   - Booking
+  - Containers
+  - Documentation
+  - GSBN
+  - IQAX
+  - Logistics
+  - Maritime
+  - Ocean Freight
+  - Schedule
+  - Shipping
+  - Supply Chain
+  - Tracking
+  - Visibility
+  - Vessel
+tags_raw:
+  - Booking
   - Container
   - Documentation
   - GSBN
@@ -61,6 +76,8 @@ apis:
   humanURL: https://www.cargosmart.com/
   baseURL: https://api.cargosmart.com
   tags:
+  - Booking
+  tags_raw:
   - Bookings
   properties:
   - type: OpenAPI
