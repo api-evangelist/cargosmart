@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CargoSmart Shipment Tracking Bookings Containers API
+  title: CargoSmart Shipment Tracking Containers API
   description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
   version: 1.0.0
   contact:
@@ -106,15 +106,13 @@ components:
         isActual:
           type: boolean
           description: true if actual, false if estimated
-    ContainerTrackingList:
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerTracking'
-        total:
-          type: integer
+        code:
+          type: string
+        message:
+          type: string
     Port:
       type: object
       properties:
@@ -127,13 +125,15 @@ components:
           type: string
         terminalName:
           type: string
-    Error:
+    ContainerTrackingList:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerTracking'
+        total:
+          type: integer
     ContainerTracking:
       type: object
       properties:
@@ -182,14 +182,14 @@ components:
           type: string
           format: date-time
   responses:
-    Unauthorized:
-      description: Unauthorized
+    NotFound:
+      description: Not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:

@@ -1,11 +1,7 @@
 {
   "provider": "cargosmart",
   "sources": [
-    "cargosmart-bookings-api-openapi.yml",
-    "cargosmart-containers-api-openapi.yml",
-    "cargosmart-documents-api-openapi.yml",
-    "cargosmart-shipments-api-openapi.yml",
-    "cargosmart-vessels-api-openapi.yml"
+    "_original/cargosmart-shipment-tracking-openapi.yml"
   ],
   "outputs": [
     "cargosmart-bookings-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "cargosmart-shipment-tracking-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "cargosmart-bookings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cargosmart-containers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cargosmart-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cargosmart-shipments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cargosmart-vessels-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CargoSmart Shipment Tracking Bookings Shipments API
+  title: CargoSmart Shipment Tracking Shipments API
   description: The CargoSmart Shipment Tracking API provides real-time container tracking and shipment visibility across ocean carriers and ports. APIs return container movement events, vessel positions, ETA predictions, and port arrival/departure data for supply chain visibility platforms.
   version: 1.0.0
   contact:
@@ -41,18 +41,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Port:
-      type: object
-      properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
-          type: string
     Shipment:
       type: object
       properties:
@@ -100,6 +88,18 @@ components:
         code:
           type: string
         message:
+          type: string
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
           type: string
     Party:
       type: object
