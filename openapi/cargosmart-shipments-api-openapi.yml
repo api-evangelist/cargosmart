@@ -41,6 +41,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
     Shipment:
       type: object
       properties:
@@ -100,19 +113,6 @@ components:
         countryCode:
           type: string
         terminalName:
-          type: string
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        taxId:
           type: string
   responses:
     NotFound:

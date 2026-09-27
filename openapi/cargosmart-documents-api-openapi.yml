@@ -40,24 +40,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    Party:
       type: object
       properties:
-        code:
+        name:
           type: string
-        message:
+        address:
           type: string
-    Port:
-      type: object
-      properties:
-        locode:
+        city:
           type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
+        country:
           type: string
-        countryCode:
-          type: string
-        terminalName:
+        taxId:
           type: string
     BillOfLading:
       type: object
@@ -112,18 +106,24 @@ components:
           enum:
           - Prepaid
           - Collect
-    Party:
+    Error:
       type: object
       properties:
-        name:
+        code:
           type: string
-        address:
+        message:
           type: string
-        city:
+    Port:
+      type: object
+      properties:
+        locode:
           type: string
-        country:
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
           type: string
-        taxId:
+        countryCode:
+          type: string
+        terminalName:
           type: string
   responses:
     NotFound:

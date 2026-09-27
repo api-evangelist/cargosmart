@@ -94,36 +94,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VesselSchedule'
-    VesselPosition:
-      type: object
-      properties:
-        vesselIMO:
-          type: string
-        vesselName:
-          type: string
-        latitude:
-          type: number
-          minimum: -90
-          maximum: 90
-        longitude:
-          type: number
-          minimum: -180
-          maximum: 180
-        speed:
-          type: number
-          description: Speed over ground in knots
-        heading:
-          type: number
-          minimum: 0
-          maximum: 360
-        destination:
-          type: string
-        eta:
-          type: string
-          format: date-time
-        timestamp:
-          type: string
-          format: date-time
     VesselSchedule:
       type: object
       properties:
@@ -168,6 +138,36 @@ components:
           type: string
         terminalName:
           type: string
+    VesselPosition:
+      type: object
+      properties:
+        vesselIMO:
+          type: string
+        vesselName:
+          type: string
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+        speed:
+          type: number
+          description: Speed over ground in knots
+        heading:
+          type: number
+          minimum: 0
+          maximum: 360
+        destination:
+          type: string
+        eta:
+          type: string
+          format: date-time
+        timestamp:
+          type: string
+          format: date-time
   securitySchemes:
     apiKey:
       type: apiKey
