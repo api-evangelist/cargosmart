@@ -95,13 +95,6 @@ components:
           enum:
           - KG
           - LB
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     Port:
       type: object
       properties:
@@ -113,6 +106,13 @@ components:
         countryCode:
           type: string
         terminalName:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
           type: string
   responses:
     NotFound:

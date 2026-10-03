@@ -84,37 +84,6 @@ components:
             $ref: '#/components/schemas/ContainerTracking'
         total:
           type: integer
-    TrackingEvent:
-      type: object
-      properties:
-        eventId:
-          type: string
-        eventType:
-          type: string
-          enum:
-          - GateIn
-          - GateOut
-          - Load
-          - Discharge
-          - Departure
-          - Arrival
-          - Customs
-          - Delivery
-          - EmptyReturn
-        description:
-          type: string
-        location:
-          $ref: '#/components/schemas/Port'
-        vesselName:
-          type: string
-        voyageNumber:
-          type: string
-        eventTime:
-          type: string
-          format: date-time
-        isActual:
-          type: boolean
-          description: true if actual, false if estimated
     ContainerTracking:
       type: object
       properties:
@@ -162,13 +131,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     Port:
       type: object
       properties:
@@ -180,6 +142,44 @@ components:
         countryCode:
           type: string
         terminalName:
+          type: string
+    TrackingEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+          enum:
+          - GateIn
+          - GateOut
+          - Load
+          - Discharge
+          - Departure
+          - Arrival
+          - Customs
+          - Delivery
+          - EmptyReturn
+        description:
+          type: string
+        location:
+          $ref: '#/components/schemas/Port'
+        vesselName:
+          type: string
+        voyageNumber:
+          type: string
+        eventTime:
+          type: string
+          format: date-time
+        isActual:
+          type: boolean
+          description: true if actual, false if estimated
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
           type: string
   responses:
     Unauthorized:

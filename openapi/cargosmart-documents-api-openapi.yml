@@ -53,6 +53,18 @@ components:
           type: string
         taxId:
           type: string
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
     BillOfLading:
       type: object
       properties:
@@ -112,18 +124,6 @@ components:
         code:
           type: string
         message:
-          type: string
-    Port:
-      type: object
-      properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
           type: string
   responses:
     NotFound:

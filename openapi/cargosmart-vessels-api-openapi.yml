@@ -87,13 +87,18 @@ paths:
                 $ref: '#/components/schemas/VesselPosition'
 components:
   schemas:
-    VesselScheduleList:
+    Port:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/VesselSchedule'
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
     VesselSchedule:
       type: object
       properties:
@@ -126,18 +131,13 @@ components:
           type: integer
         directService:
           type: boolean
-    Port:
+    VesselScheduleList:
       type: object
       properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
-          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VesselSchedule'
     VesselPosition:
       type: object
       properties:
