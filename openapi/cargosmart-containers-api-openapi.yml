@@ -84,6 +84,18 @@ components:
             $ref: '#/components/schemas/ContainerTracking'
         total:
           type: integer
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
     ContainerTracking:
       type: object
       properties:
@@ -131,18 +143,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    Port:
-      type: object
-      properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
-          type: string
     TrackingEvent:
       type: object
       properties:
@@ -182,14 +182,14 @@ components:
         message:
           type: string
   responses:
-    Unauthorized:
-      description: Unauthorized
+    NotFound:
+      description: Not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:

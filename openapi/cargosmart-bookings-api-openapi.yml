@@ -77,18 +77,17 @@ paths:
                 $ref: '#/components/schemas/BookingList'
 components:
   schemas:
-    Party:
+    Port:
       type: object
       properties:
-        name:
+        locode:
           type: string
-        address:
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
           type: string
-        city:
+        countryCode:
           type: string
-        country:
-          type: string
-        taxId:
+        terminalName:
           type: string
     BookingRequest:
       type: object
@@ -137,6 +136,19 @@ components:
           $ref: '#/components/schemas/Party'
         consignee:
           $ref: '#/components/schemas/Party'
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
     Booking:
       type: object
       properties:
@@ -190,18 +202,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Booking'
-    Port:
-      type: object
-      properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
-          type: string
     Error:
       type: object
       properties:

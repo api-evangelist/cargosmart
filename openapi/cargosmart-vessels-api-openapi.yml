@@ -99,6 +99,13 @@ components:
           type: string
         terminalName:
           type: string
+    VesselScheduleList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VesselSchedule'
     VesselSchedule:
       type: object
       properties:
@@ -131,13 +138,6 @@ components:
           type: integer
         directService:
           type: boolean
-    VesselScheduleList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/VesselSchedule'
     VesselPosition:
       type: object
       properties:
