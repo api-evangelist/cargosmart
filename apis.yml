@@ -39,7 +39,6 @@ access: 3rd-Party
 tags:
   - Booking
   - Containers
-  - Documentation
   - GSBN
   - IQAX
   - Logistics
@@ -54,7 +53,6 @@ tags:
 tags_raw:
   - Booking
   - Container
-  - Documentation
   - GSBN
   - IQAX
   - Logistics
@@ -188,3 +186,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-tags-removed:
+- Documentation
