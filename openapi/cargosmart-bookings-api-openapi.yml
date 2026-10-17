@@ -89,6 +89,79 @@ components:
           type: string
         terminalName:
           type: string
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
+    BookingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Booking'
+    Booking:
+      type: object
+      properties:
+        bookingId:
+          type: string
+        bookingNumber:
+          type: string
+        carrierCode:
+          type: string
+        status:
+          type: string
+          enum:
+          - Submitted
+          - Confirmed
+          - Amended
+          - Cancelled
+        originPort:
+          $ref: '#/components/schemas/Port'
+        destinationPort:
+          $ref: '#/components/schemas/Port'
+        requestedDepartureDate:
+          type: string
+          format: date
+        confirmedVessel:
+          type: string
+        confirmedVoyage:
+          type: string
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              containerType:
+                type: string
+                enum:
+                - 20GP
+                - 40GP
+                - 40HC
+                - 20RF
+                - 40RF
+                - 45HC
+              quantity:
+                type: integer
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     BookingRequest:
       type: object
       required:
@@ -136,79 +209,6 @@ components:
           $ref: '#/components/schemas/Party'
         consignee:
           $ref: '#/components/schemas/Party'
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        taxId:
-          type: string
-    Booking:
-      type: object
-      properties:
-        bookingId:
-          type: string
-        bookingNumber:
-          type: string
-        carrierCode:
-          type: string
-        status:
-          type: string
-          enum:
-          - Submitted
-          - Confirmed
-          - Amended
-          - Cancelled
-        originPort:
-          $ref: '#/components/schemas/Port'
-        destinationPort:
-          $ref: '#/components/schemas/Port'
-        requestedDepartureDate:
-          type: string
-          format: date
-        confirmedVessel:
-          type: string
-        confirmedVoyage:
-          type: string
-        containers:
-          type: array
-          items:
-            type: object
-            properties:
-              containerType:
-                type: string
-                enum:
-                - 20GP
-                - 40GP
-                - 40HC
-                - 20RF
-                - 40RF
-                - 45HC
-              quantity:
-                type: integer
-        createdAt:
-          type: string
-          format: date-time
-    BookingList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Booking'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   responses:
     BadRequest:
       description: Bad request

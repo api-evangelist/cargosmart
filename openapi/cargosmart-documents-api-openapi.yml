@@ -39,14 +39,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Port:
+      type: object
+      properties:
+        locode:
+          type: string
+          description: UN/LOCODE (e.g., USNYC)
+        portName:
+          type: string
+        countryCode:
+          type: string
+        terminalName:
+          type: string
     BillOfLading:
       type: object
       properties:
@@ -100,18 +105,6 @@ components:
           enum:
           - Prepaid
           - Collect
-    Port:
-      type: object
-      properties:
-        locode:
-          type: string
-          description: UN/LOCODE (e.g., USNYC)
-        portName:
-          type: string
-        countryCode:
-          type: string
-        terminalName:
-          type: string
     Party:
       type: object
       properties:
@@ -132,6 +125,13 @@ components:
           type: string
         message:
           type: string
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

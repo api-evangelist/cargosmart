@@ -40,13 +40,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Port:
       type: object
@@ -59,19 +52,6 @@ components:
         countryCode:
           type: string
         terminalName:
-          type: string
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        taxId:
           type: string
     Shipment:
       type: object
@@ -114,6 +94,19 @@ components:
           enum:
           - KG
           - LB
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        taxId:
+          type: string
     Error:
       type: object
       properties:
@@ -121,6 +114,13 @@ components:
           type: string
         message:
           type: string
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey
